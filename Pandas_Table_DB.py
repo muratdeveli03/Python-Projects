@@ -3,6 +3,7 @@ from tabulate import tabulate
 
 # Create an empty DataFrame
 records_df = pd.DataFrame(columns=["Name", "Age", "Phone", "Address", "Email"])
+df = pd.DataFrame(records_df)
 
 def add_record():
     name = input("Enter the name: ")
@@ -13,6 +14,7 @@ def add_record():
     record = {"Name": name, "Age": age, "Phone": phone, "Address": address, "Email": email}
     records_df.loc[len(records_df)] = record
     print("Record added successfully!")
+    df.to_csv('veriler.csv', index=False)
 
 def delete_record():
     name = input("Enter the name of the record you want to delete: ")
