@@ -22,8 +22,10 @@ def delete_record():
 def update_record():
     name = input("Enter the name of the record you want to update: ")
     age = int(input("Enter the new age: "))
+    phone = int(input("Enter the new phone number: "))
+    address = input("Enter the new adress: ")
     email = input("Enter the new email: ")
-    records_df.loc[records_df["Name"] == name, ["Age", "Email"]] = age, email
+    records_df.loc[records_df["Name"] == name, ["Age", "Phone", "Address", "Email"]] = age, phone, address, email
     print("Record updated successfully!")
 
 def view_records():
