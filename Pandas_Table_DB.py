@@ -1,33 +1,38 @@
 import pandas as pd
 from tabulate import tabulate
 
-# Create an empty DataFrame
-records_df = pd.DataFrame(columns=["Name", "Age", "Phone", "Address", "Email"])
-df = pd.DataFrame(records_df)
+# CSV file path
+CSV_FILE = "records.csv"
+
+# Create an empty DataFrame or load existing CSV file
+try:
+    records_df = pd.read_csv(CSV_FILE)
+except FileNotFoundError:
+    records_df = pd.DataFrame(columns=["Name", "Age", "Address", "Phone Number", "Email"])
 
 def add_record():
     name = input("Enter the name: ")
     age = int(input("Enter the age: "))
-    phone = int(input("Enter the phone number: "))
-    address = input("Enter the adress: ")
+    address = input("Enter the address: ")
+    phone_number = input("Enter the phone number: ")
     email = input("Enter the email: ")
-    record = {"Name": name, "Age": age, "Phone": phone, "Address": address, "Email": email}
+    record = {"Name": name, "Age": age, "Address": address, "Phone Number": phone_number, "Email": email}
     records_df.loc[len(records_df)] = record
+    records_df.to_csv(CSV_FILE, index=False)
     print("Record added successfully!")
-    df.to_csv('veriler.csv', index=False)
 
 def delete_record():
     name = input("Enter the name of the record you want to delete: ")
     records_df.drop(records_df[records_df["Name"] == name].index, inplace=True)
+    records_df.to_csv(CSV_FILE, index=False)
     print("Record deleted successfully!")
 
 def update_record():
     name = input("Enter the name of the record you want to update: ")
-    age = int(input("Enter the new age: "))
-    phone = int(input("Enter the new phone number: "))
-    address = input("Enter the new adress: ")
-    email = input("Enter the new email: ")
-    records_df.loc[records_df["Name"] == name, ["Age", "Phone", "Address", "Email"]] = age, phone, address, email
+    field = input("Enter the field you want to update (Name, Age, Address, Phone Number, Email): ")
+    new_value = input("Enter the new value: ")
+    records_df.loc[records_df["Name"] == name, field] = new_value
+    records_df.to_csv(CSV_FILE, index=False)
     print("Record updated successfully!")
 
 def view_records():
