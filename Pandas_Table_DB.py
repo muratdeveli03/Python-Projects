@@ -2,13 +2,15 @@ import pandas as pd
 from tabulate import tabulate
 
 # Create an empty DataFrame
-records_df = pd.DataFrame(columns=["Name", "Age", "Email"])
+records_df = pd.DataFrame(columns=["Name", "Age", "Phone", "Address", "Email"])
 
 def add_record():
     name = input("Enter the name: ")
     age = int(input("Enter the age: "))
+    phone = int(input("Enter the phone number: "))
+    address = input("Enter the adress: ")
     email = input("Enter the email: ")
-    record = {"Name": name, "Age": age, "Email": email}
+    record = {"Name": name, "Age": age, "Phone": phone, "Address": address, "Email": email}
     records_df.loc[len(records_df)] = record
     print("Record added successfully!")
 
